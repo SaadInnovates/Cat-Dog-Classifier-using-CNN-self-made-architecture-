@@ -25,8 +25,10 @@ if uploaded_file is not None:
     # Prediction
     prediction = model.predict(img_array)[0][0]
 
-    # Output
+    # Probability
     if prediction > 0.5:
-        st.write("### Prediction: Dog")
+        confidence = prediction * 100
+        st.write(f"### Prediction: Dog ({confidence:.2f}% confidence)")
     else:
-        st.write("### Prediction: Cat")
+        confidence = (1 - prediction) * 100
+        st.write(f"### Prediction: Cat ({confidence:.2f}% confidence)")
